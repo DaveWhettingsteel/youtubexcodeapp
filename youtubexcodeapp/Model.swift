@@ -16,7 +16,7 @@ class Model {
     
         let url = URL(string: Constants.API_URL)
         
-        guard url != nil else{
+        guard url != nil else {
             return
         }
         
@@ -33,8 +33,22 @@ class Model {
             return
         }
         
+        
+        // Parsing data into video objects
+        do {
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        
+        let response = try decoder.decode(Response.self, from: data!)
+        
+            dump(response)
+        }
+        catch {
+        
         }
         
+    }
     // Fire up the task
         dataTask.resume()
         
